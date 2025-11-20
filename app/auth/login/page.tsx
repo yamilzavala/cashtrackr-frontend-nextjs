@@ -17,7 +17,7 @@ const LoginPage = () => {
 
             <nav className='flex items-center mt-10 flex-col gap-2'>
                 <Link href='/auth/register' className='cursor-pointer text-gray-500'>
-                    Do don't have and account? Register
+                    You don't have and account? Register
                 </Link>
                 <Link href='/auth/forgot-password' className='cursor-pointer text-gray-500'>
                     Did you forget your password? Restore

@@ -20,8 +20,6 @@ const RegisterForm = () => {
         }
     }, [state])
 
-    console.log('state: ', state)
-
     return (
         <form
             ref={ref}
@@ -44,7 +42,7 @@ const RegisterForm = () => {
                 <input
                     id="email"
                     type="email"
-                    placeholder="Email de Registro"
+                    placeholder="Register Email"
                     className="w-full border border-gray-300 p-3 rounded-lg text-black"
                     name="email"
                 />
@@ -56,7 +54,7 @@ const RegisterForm = () => {
                 >Nombre</label>
                 <input
                     type="name"
-                    placeholder="Nombre de Registro"
+                    placeholder="Register Name"
                     className="w-full border border-gray-300 p-3 rounded-lg text-black"
                     name="name"
                 />
@@ -68,7 +66,7 @@ const RegisterForm = () => {
                 >Password</label>
                 <input
                     type="password"
-                    placeholder="Password de Registro"
+                    placeholder="Register Password"
                     className="w-full border border-gray-300 p-3 rounded-lg text-black"
                     name="password"
                 />
@@ -81,7 +79,7 @@ const RegisterForm = () => {
                 <input
                     id="password_confirmation"
                     type="password"
-                    placeholder="Repite Password de Registro"
+                    placeholder="Repeat Register Password"
                     className="w-full border border-gray-300 p-3 rounded-lg text-black"
                     name="password_confirmation"
                 />
@@ -89,7 +87,7 @@ const RegisterForm = () => {
 
             <input
                 type="submit"
-                value='Registrarme'
+                value='Register'
                 className="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer block"
             />
         </form>

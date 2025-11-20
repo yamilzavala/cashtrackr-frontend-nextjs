@@ -1,10 +1,36 @@
 'use client'
 
+import { forgotPassword } from "@/actions/forgot-password-action"
+import { useEffect } from "react"
+import { useFormState } from "react-dom"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
+
 export default function ForgotPasswordForm() {
+    const router = useRouter()
+    const [state, dispatch] = useFormState(forgotPassword, {
+        errors: [],
+        success: ''
+    })
+
+    useEffect(() => {
+        if(state.errors) {
+            state.errors.forEach(err => toast.error(err))
+        }
+        if(state.success) {
+            toast.success(state.success, {
+                onClose: () => {
+                    router.push('/auth/new-password')
+                }
+            })
+        }
+    }, [state])
+
     return (
         <form 
             className=" mt-14 space-y-5"
             noValidate
+            action={dispatch}
         >
             <div className="flex flex-col gap-2 mb-10">
                 <label
@@ -14,14 +40,14 @@ export default function ForgotPasswordForm() {
                 <input
                     type="email"
                     placeholder="Email de Registro"
-                    className="w-full border border-gray-300 p-3 rounded-lg"
+                    className="w-full border border-gray-300 p-3 rounded-lg text-black"
                     name="email"
                 />
             </div>
         
             <input 
                 type="submit"
-                value='Enviar Instrucciones'
+                value='Send Instructions'
                 className="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer "
             />
         </form>

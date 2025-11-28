@@ -43,6 +43,14 @@ export const UserSchema = z.object({
     email: z.string().email()
 })
 
+export const ResetPasswordSchema = z.object({
+    password: z.string().min(8, {message: 'Must be 8 at least characters'}),
+    password_confirmation: z.string(),
+}).refine((data) => data.password === data.password_confirmation, {
+    message: 'Passwords are not equals',
+    path: ['password_confirmation']
+})
+
 export type User = z.infer<typeof UserSchema>
 
 export const ForgotPasswordSchema = z.object({
@@ -50,3 +58,20 @@ export const ForgotPasswordSchema = z.object({
             .min(1, {message: 'Required Email'})
             .email()
 })
+export const DraftBudgetSchema = z.object({
+    name: z.string().min(1, {message: 'Budget name required'}),
+    amount: z.coerce.number({message: 'Not valid amount'}).min(1, {message: 'Not valid amount'})
+})
+
+export const BudgetAPIResponseSchema = z.object({
+        id: z.number(),
+        name: z.string(),
+        amount: z.string(),
+        userId: z.number(),
+        createdAt: z.string(),
+        updatedAt: z.string()
+})
+
+export const BudgetsAPIResponseSchema = z.array(BudgetAPIResponseSchema)
+
+export type Budget = z.infer<typeof BudgetAPIResponseSchema>

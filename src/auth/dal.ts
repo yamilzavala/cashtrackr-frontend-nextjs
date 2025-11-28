@@ -1,11 +1,11 @@
 import "server-only"
-import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { UserSchema } from "../schemas"
 import { cache } from "react"
+import getToken from "./token"
 
 export const verifySession = cache(async () => {
-    const token = cookies().get('CASHTRACKR_TOKEN')
+    const token = getToken()
     console.log(token)
 
     if(!token) {
@@ -15,7 +15,7 @@ export const verifySession = cache(async () => {
     const url = `${process.env.API_URL}/auth/user`
     const req = await fetch(url, {
         headers: {
-            Authorization: `Bearer ${token.value}` 
+            Authorization: `Bearer ${token}` 
         }
     })
 

@@ -1,15 +1,15 @@
 'use server'
 
 import getToken from "@/src/auth/token";
-import { DraftBudgetSchema, ErrorSchema, SuccessSchema } from "@/src/schemas";
-import { revalidatePath } from "next/cache";
+import { Budget, DraftBudgetSchema, ErrorSchema, SuccessSchema } from "@/src/schemas";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 type ActionStateType = {
     errors: string [],
-    success: string,
+    success: string
 }
 
-export async function createBudget(prevState: ActionStateType, formData: FormData) {
+export async function editBudget(budgetId: Budget['id'], prevState: ActionStateType, formData: FormData) {
     const budgetInput = {
         name: formData.get('name'),
         amount: formData.get('amount')
@@ -26,9 +26,9 @@ export async function createBudget(prevState: ActionStateType, formData: FormDat
     
     // request to backend service
     const token = getToken()
-    const url = `${process.env.API_URL}/budgets`
+    const url = `${process.env.API_URL}/budgets/${budgetId}`
     const req = await fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -49,8 +49,9 @@ export async function createBudget(prevState: ActionStateType, formData: FormDat
         }
     }
 
-    const success = SuccessSchema.parse(json)
     revalidatePath('/admin')
+    // revalidateTag('/all-budgets')
+    const success = SuccessSchema.parse(json)
 
     return {
         errors: [],

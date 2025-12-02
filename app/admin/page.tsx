@@ -1,4 +1,5 @@
 import BudgetMenu from '@/components/budgets/BudgetMenu';
+import DeleteBudgetModal from '@/components/budgets/DeleteBudgetModal';
 import getToken from '@/src/auth/token';
 import { BudgetsAPIResponseSchema } from '@/src/schemas';
 import { formatCurrency, formatDate } from '@/src/utils';
@@ -46,34 +47,37 @@ export default async function AdminPage() {
             </div>
 
             {budgets.length ? (
-                <ul role="list" className="divide-y divide-gray-300 border shadow-lg mt-10 ">
-                    {budgets.map((budget) => (
-                        <li key={budget.id} className="flex justify-between gap-x-6 p-5 ">
-                            <div className="flex min-w-0 gap-x-4">
-                                <div className="min-w-0 flex-auto space-y-2">
-                                    <p className="text-sm font-semibold leading-6 text-gray-900">
-                                        <Link 
-                                            className='text-white cursor-pointer hover:underline text-2xl font-bold' 
-                                            href={`/admin/budgets/${budget.id}`}
-                                        >
-                                            {budget.name}
-                                        </Link>
-                                    </p>
-                                    <p className="text-xl font-bold text-amber-500">
-                                        {formatCurrency(+budget.amount)}
-                                    </p>
-                                    <p className='text-gray-500  text-sm'>
-                                        Last update: {''}
-                                        <span className='font-bold'>{formatDate(budget.updatedAt)}</span>
-                                    </p>
+                <>
+                    <ul role="list" className="divide-y divide-gray-300 border shadow-lg mt-10 ">
+                        {budgets.map((budget) => (
+                            <li key={budget.id} className="flex justify-between gap-x-6 p-5 ">
+                                <div className="flex min-w-0 gap-x-4">
+                                    <div className="min-w-0 flex-auto space-y-2">
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                                            <Link 
+                                                className='text-white cursor-pointer hover:underline text-2xl font-bold' 
+                                                href={`/admin/budgets/${budget.id}`}
+                                            >
+                                                {budget.name}
+                                            </Link>
+                                        </p>
+                                        <p className="text-xl font-bold text-amber-500">
+                                            {formatCurrency(+budget.amount)}
+                                        </p>
+                                        <p className='text-gray-500  text-sm'>
+                                            Last update: {''}
+                                            <span className='font-bold'>{formatDate(budget.updatedAt)}</span>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex shrink-0 items-center gap-x-6">
-                                <BudgetMenu budgetId={budget.id}/>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                                <div className="flex shrink-0 items-center gap-x-6">
+                                    <BudgetMenu budgetId={budget.id}/>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <DeleteBudgetModal />
+                </>
             ) : (
                 <p className='text-center py-20'>
                     There is not

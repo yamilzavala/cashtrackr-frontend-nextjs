@@ -8,6 +8,7 @@ import { useFormState } from "react-dom"
 import { toast } from "react-toastify"
 import ErrorMessage from "../ui/ErrorMessage"
 import Submit from "../ui/Submit"
+import CancelBtn from "../ui/CancelBtn"
 
 export default function ConfirmPasswordForm() {
     const pathname = usePathname()
@@ -75,10 +76,11 @@ export default function ConfirmPasswordForm() {
                         className="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-black cursor-pointer transition-colors"
                     /> */}
                     <Submit label='Delete Budget'/>
-                    <button
+                    {/* <button
                         className="bg-amber-500 hover:bg-amber-600 w-full p-3 rounded-lg text-white font-black cursor-pointer transition-colors"
                         onClick={closeModal}
-                    >Cancel</button>
+                    >Cancel</button> */}
+                   <CancelBtn closeModal={closeModal} />
                 </div>
             </form>
 

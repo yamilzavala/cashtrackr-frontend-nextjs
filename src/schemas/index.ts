@@ -51,7 +51,7 @@ export const ResetPasswordSchema = z.object({
     path: ['password_confirmation']
 })
 
-export type User = z.infer<typeof UserSchema>
+
 
 export const ForgotPasswordSchema = z.object({
     email: z.string()
@@ -87,8 +87,11 @@ export const BudgetAPIResponseSchema = z.object({
         expenses: z.array(ExpenseAPIResponseSchema)
 })
 
+export const PasswordValidationSchema = z.string().min(1, {message: 'Password not valid'});
+
 export const BudgetsAPIResponseSchema = z.array(BudgetAPIResponseSchema.omit({expenses: true}))
 
+export type User = z.infer<typeof UserSchema>
 export type Budget = z.infer<typeof BudgetAPIResponseSchema>
-
-export const PasswordValidationSchema = z.string().min(1, {message: 'Password not valid'});
+export type DraftExpense = z.infer<typeof DraftExpenseSchema>
+export type Expense = z.infer<typeof ExpenseAPIResponseSchema>

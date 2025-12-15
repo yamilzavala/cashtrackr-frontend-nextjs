@@ -3,6 +3,7 @@ import AddExpenseButton from "@/components/expenses/AddExpenseButton"
 import { getBudgetById } from "@/src/services/budgets"
 import { Metadata } from "next"
 import { formatCurrency, formatDate } from "@/src/utils"
+import ExpenseMenu from "@/components/expenses/ExpenseMenu"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const budget = await getBudgetById(params.id)
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 export default async function BudgetDetailsPage({ params }: { params: { id: string } }) {
   const budget = await getBudgetById(params.id)
   console.log(budget)
+
   return (
     <>
       <div className='flex justify-between items-center'>
@@ -47,6 +49,9 @@ export default async function BudgetDetailsPage({ params }: { params: { id: stri
                       <span className="font-bold">{formatDate(expense.updatedAt)}</span>
                     </p>
                   </div>
+                </div>
+                <div className="flex shrink-0 items-center gap-x-6">
+                  <ExpenseMenu expenseId={+expense.id} />
                 </div>
               </li>
             ))}

@@ -4,6 +4,9 @@ import { getBudgetById } from "@/src/services/budgets"
 import { Metadata } from "next"
 import { formatCurrency, formatDate } from "@/src/utils"
 import ExpenseMenu from "@/components/expenses/ExpenseMenu"
+import ExpenseList from "@/components/expenses/ExpenseList"
+import Amount from "@/components/ui/Amount"
+import ProgressBar from "@/components/budgets/ProgressBar"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const budget = await getBudgetById(params.id)
@@ -17,6 +20,9 @@ export default async function BudgetDetailsPage({ params }: { params: { id: stri
   const budget = await getBudgetById(params.id)
   console.log(budget)
 
+  const totalSpent = budget.expenses.reduce((total, expense) => +expense.amount + total, 0)
+  const available = +budget.amount - totalSpent;
+  const percentage = +((totalSpent/ +budget.amount) * 100).toFixed(2)
   return (
     <>
       <div className='flex justify-between items-center'>
@@ -29,6 +35,16 @@ export default async function BudgetDetailsPage({ params }: { params: { id: stri
 
       {budget.expenses.length ? (
         <>
+          <div className="grid grid-cols-1 md:grid-cols-2 mt-10">
+            <ProgressBar percentage={percentage} />
+
+            <div className="flex flex-col justify-center items-center md:items-start gap-5">
+              <Amount label="Budget" amount={+budget.amount}/>
+              <Amount label="Available" amount={available}/>
+              <Amount label="Spent" amount={totalSpent}/>
+            </div>
+          </div>
+
           <h1 className="font-black text-4xl text-purple-950 mt-10">
             Expenses in this budget
           </h1>
@@ -55,6 +71,7 @@ export default async function BudgetDetailsPage({ params }: { params: { id: stri
                 </div>
               </li>
             ))}
+            {/* <ExpenseList budget={budget} /> */}
           </ul>
         </>
 

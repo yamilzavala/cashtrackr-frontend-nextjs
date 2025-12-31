@@ -7,6 +7,7 @@ export default function CancelBtn({ closeModal }: {closeModal: () => void}) {
     const status = useFormStatus()
     return (
         <button
+            type='button'
             className={status.pending ? `${commonStyles} bg-gray-800` : `${commonStyles} hover:bg-amber-600`}
             onClick={closeModal}
             disabled={status.pending}

@@ -51,6 +51,23 @@ export const ResetPasswordSchema = z.object({
     path: ['password_confirmation']
 })
 
+export const UpdatePasswordSchema = z.object({
+    current_password: z.string().min(1, {message: 'Can not be empty'}),
+    password: z.string().min(8, {message: 'Must be 8 at least characters'}),
+    password_confirmation: z.string()
+}).refine((data) => data.password === data.password_confirmation, {
+    message: 'Passwords are not equals',
+    path: ['password_confirmation']
+})
+
+export const UpdateProfileSchema = z.object({
+    name: z.string()
+            .min(1, {message: 'Name required'}),
+    email: z.string()
+            .min(1, {message: 'Email required'})
+            .email({message: 'Invalid email'})
+})
+
 
 
 export const ForgotPasswordSchema = z.object({

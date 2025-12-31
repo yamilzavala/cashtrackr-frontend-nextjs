@@ -22,7 +22,7 @@ export default function ChangePasswordForm() {
         })
         ref.current?.reset()
     }
-  }, [state])
+  }, [state, router])
 
 
   return (

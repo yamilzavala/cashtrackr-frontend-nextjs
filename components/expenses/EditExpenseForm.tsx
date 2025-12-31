@@ -32,14 +32,14 @@ export default function EditExpenseForm({ closeModal }: { closeModal: () => void
       .then(data => {
         setExpense(data)
       })
-  }, [])
+  }, [budgetId, expenseId])
 
   useEffect(() => {
     if(state.success) {
       toast.success(state.success)
       closeModal()
     }
-  }, [state])
+  }, [state, closeModal])
 
   return (
     <>

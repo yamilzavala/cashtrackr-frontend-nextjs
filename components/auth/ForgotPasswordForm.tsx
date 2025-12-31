@@ -24,7 +24,7 @@ export default function ForgotPasswordForm() {
                 }
             })
         }
-    }, [state])
+    }, [state, router])
 
     return (
         <form 

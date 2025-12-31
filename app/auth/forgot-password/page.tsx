@@ -20,7 +20,7 @@ const ForgotPasswordPage = () => {
                     Do you have and account? Login
                 </Link>
                 <Link href='/auth/register' className='cursor-pointer text-gray-500'>
-                    Do don't have and account? Register
+                    Do don&apos;t have and account? Register
                 </Link>
             </nav>
         </>

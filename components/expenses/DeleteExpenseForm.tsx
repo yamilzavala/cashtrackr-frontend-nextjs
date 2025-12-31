@@ -1,7 +1,6 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
 import CancelBtn from "../ui/CancelBtn";
-import Submit from "../ui/Submit";
 import { useFormState } from "react-dom";
 import { deleteExpense } from "@/actions/delete-expense-action";
 import { useEffect } from "react";
@@ -31,14 +30,14 @@ export default function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
     if(!Number.isInteger(+budgetId) || !Number.isInteger(+expenseId)) {
       closeModal()
     }
-  }, [])
+  }, [budgetId, closeModal, expenseId])
 
   useEffect(() => {
     if(state.success) {
       toast.success(state.success)
       closeModal();
     }
-  }, [state])
+  }, [state, closeModal])
 
   return (
     <>

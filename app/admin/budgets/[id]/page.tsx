@@ -4,7 +4,6 @@ import { getBudgetById } from "@/src/services/budgets"
 import { Metadata } from "next"
 import { formatCurrency, formatDate } from "@/src/utils"
 import ExpenseMenu from "@/components/expenses/ExpenseMenu"
-import ExpenseList from "@/components/expenses/ExpenseList"
 import Amount from "@/components/ui/Amount"
 import ProgressBar from "@/components/budgets/ProgressBar"
 

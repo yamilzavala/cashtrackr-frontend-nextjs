@@ -29,7 +29,7 @@ const RegisterForm = () => {
         >
 
             {state?.errors.map((error) => (
-                <ErrorMessage>{error}</ErrorMessage>
+                <ErrorMessage key={error}>{error}</ErrorMessage>
             ))}
 
             {state.success && <SuccessMessage>{state.success}</SuccessMessage>}

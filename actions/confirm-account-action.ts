@@ -1,7 +1,6 @@
 'use server'
 
 import { ErrorSchema, SuccessSchema, TokenSchema } from "@/src/schemas"
-import { success } from "zod"
 
 type ActionStateType = {
     errors: string[],

@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@chakra-ui/pin-input": "^2.1.0",
+    "@chakra-ui/system": "^2.6.2",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "framer-motion": "^11.0.0",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/forms": "^0.5.10",
@@ -20,7 +25,7 @@
     "react-dom": "^18",
     "react-toastify": "^11.0.5",
     "server-only": "^0.0.1",
-    "zod": "^4.1.12"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

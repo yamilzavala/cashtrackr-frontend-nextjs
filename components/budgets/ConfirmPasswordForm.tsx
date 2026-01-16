@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { DialogTitle } from "@headlessui/react"
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 import { deleteBudget } from "@/actions/delete-budget-action"
 import { useFormState } from "react-dom"
 import { toast } from "react-toastify"
@@ -22,11 +22,11 @@ export default function ConfirmPasswordForm() {
         success: ''
     })
 
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         const hideModal = new URLSearchParams(searchParams.toString())
         hideModal.delete('deleteBudgetId')
         router.replace(`${pathname}?${hideModal}`)
-    }
+    }, [pathname, router, searchParams])
 
     useEffect(() => {
         if (state.success) {

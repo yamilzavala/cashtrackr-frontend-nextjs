@@ -11,7 +11,7 @@ export default function AddExpenseButton() {
         className="text-white bg-amber-500 px-10 py-2 rounded-lg font-bold cursor-pointer "
         onClick={() => router.push(location.pathname + '?addExpense=true&showModal=true')}
     >
-        Add Expense
+        Add expense
     </button>
   )
 }
